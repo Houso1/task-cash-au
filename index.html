@@ -34,7 +34,7 @@
 
     /* Modern Grid Options */
     .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
-    .feature-item { background: rgba(15, 23, 42, 0.5); padding: 16px 12px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.06); font-size: 13px; color: #e2e8f0; font-weight: 600; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: 0.2s; }
+    .feature-item { background: rgba(15, 23, 42, 0.5); padding: 16px 12px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.06); font-size: 13px; color: #e2e8f0; font-weight: 600; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: 0.2s; cursor: pointer; }
     .feature-item span { font-size: 22px; }
     .feature-item:hover { border-color: #38bdf8; background: rgba(56, 189, 248, 0.05); transform: translateY(-2px); }
 
@@ -65,10 +65,10 @@
       <p>Sign up with your email to claim your first reward for free and unlock games, videos, and tasks.</p>
       
       <div class="features-grid">
-        <a href="#" class="feature-item" onclick="openTask('Games')"><span>🎮</span> Play Games</a>
-        <a href="#" class="feature-item" onclick="openTask('Videos')"><span>📺</span> Watch Videos</a>
-        <a href="#" class="feature-item" onclick="openTask('Tasks')"><span>📋</span> Complete Tasks</a>
-        <a href="#" class="feature-item" onclick="openTask('Cash')"><span>⭐</span> Earn Real Cash</a>
+        <div class="feature-item" onclick="openTask('Games')"><span>🎮</span> Play Games</div>
+        <div class="feature-item" onclick="openTask('Videos')"><span>📺</span> Watch Videos</div>
+        <div class="feature-item" onclick="openTask('Tasks')"><span>📋</span> Complete Tasks</div>
+        <div class="feature-item" onclick="openTask('Cash')"><span>⭐</span> Earn Real Cash</div>
       </div>
 
       <form id="signup-form" onsubmit="handleSignup(event)">
@@ -93,10 +93,10 @@
       </div>
 
       <div class="features-grid" style="margin-top: 20px;">
-        <a href="#" class="feature-item" onclick="openTask('Games')"><span>🎮</span> Play Games</a>
-        <a href="#" class="feature-item" onclick="openTask('Videos')"><span>📺</span> Watch Videos</a>
-        <a href="#" class="feature-item" onclick="openTask('Tasks')"><span>📋</span> Complete Tasks</a>
-        <a href="#" class="feature-item" onclick="openTask('Cash')"><span>⭐</span> Offer Wall</a>
+        <div class="feature-item" onclick="openTask('Games')"><span>🎮</span> Play Games</div>
+        <div class="feature-item" onclick="openTask('Videos')"><span>📺</span> Watch Videos</div>
+        <div class="feature-item" onclick="openTask('Tasks')"><span>📋</span> Complete Tasks</div>
+        <div class="feature-item" onclick="openTask('Cash')"><span>⭐</span> Offer Wall</div>
       </div>
 
       <button class="cashout-btn" onclick="requestWithdrawal()">Request Cashout</button>
@@ -126,8 +126,6 @@
     function openTask(type) {
       // 🔗 REPLACE THE URL BELOW WITH YOUR ACTUAL CPALEAD OFFER WALL LINK WHEN READY
       const offerwallUrl = "https://your-cpalead-offerwall-link.com";
-      
-      // This will redirect the user directly to your offer wall
       window.location.href = offerwallUrl;
     }
 
