@@ -1,1 +1,124 @@
-<iframe width="100%" frameBorder="0" height="2000px" src="https://offers.cpx-research.com/index.php?app_id=35482&ext_user_id={unique_user_id}&secure_hash={secure_hash}&username={user_name}&email={user_email}&subid_1=&subid_2"></iframe>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Cash - Play Games, Watch Videos & Earn Money</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f172a; color: #f8fafc; min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; }
+        
+        /* Navbar */
+        nav { background: #1e293b; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; }
+        .logo { font-size: 20px; font-weight: bold; color: #38bdf8; }
+        .user-panel { display: none; align-items: center; gap: 15px; font-size: 14px; }
+        .balance { background: #059669; padding: 6px 12px; border-radius: 20px; font-weight: bold; }
+        .logout-btn { background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; }
+        .logout-btn:hover { background: #dc2626; }
+
+        /* Main Container */
+        .container { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; text-align: center; }
+        
+        /* Login / Welcome Card */
+        #login-box { background: #1e293b; padding: 40px; border-radius: 12px; width: 100%; max-width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); border: 1px solid #334155; }
+        .badge { background: #22c55e; color: #0f172a; font-weight: bold; padding: 4px 10px; border-radius: 12px; font-size: 12px; display: inline-block; margin-bottom: 15px; }
+        #login-box h1 { font-size: 24px; margin-bottom: 10px; color: #f8fafc; }
+        #login-box p { color: #94a3b8; font-size: 14px; margin-bottom: 25px; line-height: 1.5; }
+        
+        /* Features Preview List */
+        .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 25px; text-align: left; }
+        .feature-item { background: #0f172a; padding: 10px; border-radius: 6px; font-size: 13px; color: #cbd5e1; border: 1px solid #334155; }
+
+        input { width: 100%; padding: 12px; font-size: 16px; background: #0f172a; border: 1px solid #475569; color: white; border-radius: 6px; margin-bottom: 15px; }
+        input:focus { outline: none; border-color: #38bdf8; }
+        button.start-btn { width: 100%; padding: 12px; font-size: 16px; background: #38bdf8; color: #0f172a; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+        button.start-btn:hover { background: #0ea5e9; }
+
+        /* Offerwall Section */
+        #offerwall-container { display: none; width: 100%; max-width: 1200px; margin: 20px auto; flex: 1; }
+        iframe { width: 100%; min-height: 800px; border: none; border-radius: 8px; background: white; }
+
+        /* Footer */
+        footer { text-align: center; padding: 20px; color: #64748b; font-size: 13px; border-top: 1px solid #1e293b; }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">⚡ Task Cash</div>
+        <div id="userPanel" class="user-panel">
+            <span id="displayEmail"></span>
+            <div class="balance" id="balanceDisplay">Balance: $10.00</div>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="container">
+        <!-- Login Form -->
+        <div id="login-box">
+            <span class="badge">🎁 $10 Free Welcome Bonus</span>
+            <h1>Start Earning Today</h1>
+            <p>Sign up with your email to claim your first reward for free and unlock games, videos, and tasks.</p>
+            
+            <div class="features-grid">
+                <div class="feature-item">🎮 Play Games</div>
+                <div class="feature-item">📺 Watch Videos</div>
+                <div class="feature-item">📋 Complete Tasks</div>
+                <div class="feature-item">⭐ Earn Real Cash</div>
+            </div>
+
+            <input type="email" id="userEmail" placeholder="Enter your email address..." required>
+            <button class="start-btn" onclick="startWall()">Get Started & Claim $10</button>
+        </div>
+
+        <!-- Offerwall Wrapper -->
+        <div id="offerwall-container">
+            <iframe id="cpxFrame" src=""></iframe>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2026 Task Cash. All rights reserved.
+    </footer>
+
+    <script>
+        window.onload = function() {
+            const savedEmail = sessionStorage.getItem('taskCashEmail');
+            if (savedEmail) {
+                document.getElementById('userEmail').value = savedEmail;
+                startWall();
+            }
+        }
+
+        function startWall() {
+            const email = document.getElementById('userEmail').value.trim();
+            if(!email || !email.includes('@')) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            
+            sessionStorage.setItem('taskCashEmail', email);
+            const uniqueUserId = btoa(email); 
+
+            const cpxUrl = `https://offers.cpx-research.com/index.php?app_id=35482&ext_user_id=${uniqueUserId}&email=${encodeURIComponent(email)}`;
+            
+            document.getElementById('login-box').style.display = 'none';
+            document.getElementById('cpxFrame').src = cpxUrl;
+            document.getElementById('offerwall-container').style.display = 'block';
+            
+            document.getElementById('displayEmail').innerText = email;
+            document.getElementById('userPanel').style.display = 'flex';
+        }
+
+        function logout() {
+            sessionStorage.removeItem('taskCashEmail');
+            location.reload();
+        }
+    </script>
+
+</body>
+</html>
+
