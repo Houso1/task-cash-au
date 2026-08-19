@@ -1,46 +1,48 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Task Cash - Play Games, Watch Videos & Earn</title>
+  <title>Task Cash - Rewards & Offers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { background-color: #0f172a; color: #f8fafc; display: flex; flex-direction: column; min-height: 100vh; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background: linear-gradient(135deg, #090d16 0%, #111827 100%); color: #f3f4f6; min-height: 100vh; display: flex; flex-direction: column; }
     
-    /* Navbar */
-    nav { background: #1e293b; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; }
-    .logo { font-size: 20px; font-weight: bold; color: #38bdf8; }
-    .user-panel { display: none; align-items: center; gap: 15px; }
-    .balance { background: #059669; padding: 6px 12px; border-radius: 20px; font-weight: bold; font-size: 14px; }
-    .logout-btn { background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; }
-    .logout-btn:hover { background: #dc2626; }
+    /* Modern Navbar */
+    nav { background: rgba(17, 24, 39, 0.8); backdrop-filter: blur(10px); padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.08); position: sticky; top: 0; z-index: 100; }
+    .logo { font-size: 20px; font-weight: 700; color: #38bdf8; display: flex; align-items: center; gap: 8px; }
+    .user-panel { display: none; align-items: center; gap: 12px; }
+    .balance { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); padding: 6px 14px; border-radius: 30px; font-weight: 600; font-size: 14px; }
+    .logout-btn { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); padding: 6px 14px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px; transition: 0.2s; }
+    .logout-btn:hover { background: #ef4444; color: white; }
 
     /* Main Container */
-    .container { flex: 1; display: flex; justify-content: center; align-items: center; padding: 20px; }
+    .container { flex: 1; display: flex; justify-content: center; align-items: center; padding: 24px; }
     
-    /* Cards */
-    .card { background: #1e293b; padding: 30px; border-radius: 16px; width: 100%; max-width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); border: 1px solid #334155; text-align: center; }
-    .badge { background: #22c55e; color: #022c22; display: inline-block; padding: 6px 14px; border-radius: 20px; font-weight: bold; font-size: 13px; margin-bottom: 15px; }
-    h1 { font-size: 24px; margin-bottom: 10px; color: #ffffff; }
-    p { color: #94a3b8; font-size: 14px; margin-bottom: 20px; line-height: 1.5; }
+    /* Polished Cards */
+    .card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); padding: 36px 28px; border-radius: 24px; width: 100%; max-width: 480px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.08); text-align: center; }
+    .badge { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; display: inline-block; padding: 6px 16px; border-radius: 30px; font-weight: 700; font-size: 12px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
+    h1 { font-size: 26px; margin-bottom: 10px; font-weight: 700; color: #ffffff; }
+    p { color: #9ca3af; font-size: 14px; margin-bottom: 28px; line-height: 1.6; }
 
     /* Form Elements */
-    input[type="email"] { width: 100%; padding: 12px 15px; border-radius: 8px; border: 1px solid #475569; background: #0f172a; color: white; font-size: 15px; margin-bottom: 15px; outline: none; }
-    input[type="email"]:focus { border-color: #38bdf8; }
-    .primary-btn { width: 100%; background: #38bdf8; color: #0f172a; border: none; padding: 12px; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.2s; }
-    .primary-btn:hover { background: #0ea5e9; }
+    input[type="email"] { width: 100%; padding: 14px 18px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(15, 23, 42, 0.6); color: white; font-size: 15px; margin-bottom: 16px; outline: none; transition: 0.2s; }
+    input[type="email"]:focus { border-color: #38bdf8; box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15); }
+    .primary-btn { width: 100%; background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%); color: #0f172a; border: none; padding: 14px; border-radius: 12px; font-weight: 700; font-size: 16px; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 14px rgba(56, 189, 248, 0.3); }
+    .primary-btn:hover { transform: translateY(-1px); opacity: 0.95; }
 
-    /* Grid Options / Clickable Tasks */
-    .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-    .feature-item { background: #0f172a; padding: 12px; border-radius: 8px; border: 1px solid #334155; font-size: 13px; color: #cbd5e1; font-weight: 500; text-decoration: none; display: block; transition: 0.2s; }
-    .feature-item:hover { border-color: #38bdf8; color: #38bdf8; }
+    /* Modern Grid Options */
+    .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+    .feature-item { background: rgba(15, 23, 42, 0.5); padding: 16px 12px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.06); font-size: 13px; color: #e2e8f0; font-weight: 600; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: 0.2s; }
+    .feature-item span { font-size: 22px; }
+    .feature-item:hover { border-color: #38bdf8; background: rgba(56, 189, 248, 0.05); transform: translateY(-2px); }
 
     /* Dashboard View */
     #dashboard-view { display: none; text-align: left; }
-    .stat-box { background: #0f172a; padding: 15px; border-radius: 10px; border: 1px solid #334155; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
-    .cashout-btn { width: 100%; background: #10b981; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; font-size: 15px; cursor: pointer; margin-top: 10px; }
-    .cashout-btn:hover { background: #059669; }
+    .stat-box { background: rgba(15, 23, 42, 0.5); padding: 16px 20px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.06); margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; }
+    .cashout-btn { width: 100%; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border: none; padding: 14px; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; margin-top: 14px; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3); transition: 0.2s; }
+    .cashout-btn:hover { transform: translateY(-1px); opacity: 0.95; }
   </style>
 </head>
 <body>
@@ -63,10 +65,10 @@
       <p>Sign up with your email to claim your first reward for free and unlock games, videos, and tasks.</p>
       
       <div class="features-grid">
-        <a href="#" class="feature-item" onclick="openTask('Games')">🎮 Play Games</a>
-        <a href="#" class="feature-item" onclick="openTask('Videos')">📺 Watch Videos</a>
-        <a href="#" class="feature-item" onclick="openTask('Tasks')">📋 Complete Tasks</a>
-        <a href="#" class="feature-item" onclick="openTask('Cash')">⭐ Earn Real Cash</a>
+        <a href="#" class="feature-item" onclick="openTask('Games')"><span>🎮</span> Play Games</a>
+        <a href="#" class="feature-item" onclick="openTask('Videos')"><span>📺</span> Watch Videos</a>
+        <a href="#" class="feature-item" onclick="openTask('Tasks')"><span>📋</span> Complete Tasks</a>
+        <a href="#" class="feature-item" onclick="openTask('Cash')"><span>⭐</span> Earn Real Cash</a>
       </div>
 
       <form id="signup-form" onsubmit="handleSignup(event)">
@@ -78,23 +80,23 @@
     <!-- Dashboard Screen -->
     <div class="card" id="dashboard-view">
       <h1>Welcome Back!</h1>
-      <p id="user-email-display" style="color: #38bdf8; margin-bottom: 15px;"></p>
+      <p id="user-email-display" style="color: #38bdf8; margin-bottom: 20px; font-weight: 500;"></p>
       
       <div class="stat-box">
-        <span>Current Balance:</span>
-        <strong style="color: #34d399; font-size: 18px;" id="dashboard-balance">$10.00</strong>
+        <span style="color: #9ca3af;">Current Balance:</span>
+        <strong style="color: #34d399; font-size: 20px;" id="dashboard-balance">$10.00</strong>
       </div>
       
       <div class="stat-box">
-        <span>Minimum Cashout:</span>
-        <strong>$50.00</strong>
+        <span style="color: #9ca3af;">Minimum Cashout:</span>
+        <strong style="color: #f3f4f6; font-size: 16px;">$50.00</strong>
       </div>
 
-      <div class="features-grid" style="margin-top: 15px;">
-        <a href="#" class="feature-item" onclick="openTask('Games')">🎮 Play Games</a>
-        <a href="#" class="feature-item" onclick="openTask('Videos')">📺 Watch Videos</a>
-        <a href="#" class="feature-item" onclick="openTask('Tasks')">📋 Complete Tasks</a>
-        <a href="#" class="feature-item" onclick="openTask('Cash')">⭐ Offer Wall</a>
+      <div class="features-grid" style="margin-top: 20px;">
+        <a href="#" class="feature-item" onclick="openTask('Games')"><span>🎮</span> Play Games</a>
+        <a href="#" class="feature-item" onclick="openTask('Videos')"><span>📺</span> Watch Videos</a>
+        <a href="#" class="feature-item" onclick="openTask('Tasks')"><span>📋</span> Complete Tasks</a>
+        <a href="#" class="feature-item" onclick="openTask('Cash')"><span>⭐</span> Offer Wall</a>
       </div>
 
       <button class="cashout-btn" onclick="requestWithdrawal()">Request Cashout</button>
@@ -122,7 +124,7 @@
     }
 
     function openTask(type) {
-      // Once your CPAlead account is approved, replace the URL below with your offerwall link
+      // Once approved, replace this URL with your CPAlead offer wall link
       const offerwallUrl = "https://your-cpalead-offerwall-link.com";
       window.location.href = offerwallUrl;
     }
@@ -134,4 +136,3 @@
 
 </body>
 </html>
-
