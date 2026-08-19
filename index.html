@@ -1,123 +1,136 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Cash - Play Games, Watch Videos & Earn Money</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f172a; color: #f8fafc; min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; }
-        
-        /* Navbar */
-        nav { background: #1e293b; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; }
-        .logo { font-size: 20px; font-weight: bold; color: #38bdf8; }
-        .user-panel { display: none; align-items: center; gap: 15px; font-size: 14px; }
-        .balance { background: #059669; padding: 6px 12px; border-radius: 20px; font-weight: bold; }
-        .logout-btn { background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; }
-        .logout-btn:hover { background: #dc2626; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Cash - Play Games, Watch Videos & Earn</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: #0f172a; color: #f8fafc; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Navbar */
+    nav { background: #1e293b; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; }
+    .logo { font-size: 20px; font-weight: bold; color: #38bdf8; }
+    .user-panel { display: none; align-items: center; gap: 15px; }
+    .balance { background: #059669; padding: 6px 12px; border-radius: 20px; font-weight: bold; font-size: 14px; }
+    .logout-btn { background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    .logout-btn:hover { background: #dc2626; }
 
-        /* Main Container */
-        .container { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; text-align: center; }
-        
-        /* Login / Welcome Card */
-        #login-box { background: #1e293b; padding: 40px; border-radius: 12px; width: 100%; max-width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); border: 1px solid #334155; }
-        .badge { background: #22c55e; color: #0f172a; font-weight: bold; padding: 4px 10px; border-radius: 12px; font-size: 12px; display: inline-block; margin-bottom: 15px; }
-        #login-box h1 { font-size: 24px; margin-bottom: 10px; color: #f8fafc; }
-        #login-box p { color: #94a3b8; font-size: 14px; margin-bottom: 25px; line-height: 1.5; }
-        
-        /* Features Preview List */
-        .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 25px; text-align: left; }
-        .feature-item { background: #0f172a; padding: 10px; border-radius: 6px; font-size: 13px; color: #cbd5e1; border: 1px solid #334155; }
+    /* Main Container */
+    .container { flex: 1; display: flex; justify-content: center; align-items: center; padding: 20px; }
+    
+    /* Cards */
+    .card { background: #1e293b; padding: 30px; border-radius: 16px; width: 100%; max-width: 450px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); border: 1px solid #334155; text-align: center; }
+    .badge { background: #22c55e; color: #022c22; display: inline-block; padding: 6px 14px; border-radius: 20px; font-weight: bold; font-size: 13px; margin-bottom: 15px; }
+    h1 { font-size: 24px; margin-bottom: 10px; color: #ffffff; }
+    p { color: #94a3b8; font-size: 14px; margin-bottom: 20px; line-height: 1.5; }
 
-        input { width: 100%; padding: 12px; font-size: 16px; background: #0f172a; border: 1px solid #475569; color: white; border-radius: 6px; margin-bottom: 15px; }
-        input:focus { outline: none; border-color: #38bdf8; }
-        button.start-btn { width: 100%; padding: 12px; font-size: 16px; background: #38bdf8; color: #0f172a; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; transition: 0.2s; }
-        button.start-btn:hover { background: #0ea5e9; }
+    /* Form Elements */
+    input[type="email"] { width: 100%; padding: 12px 15px; border-radius: 8px; border: 1px solid #475569; background: #0f172a; color: white; font-size: 15px; margin-bottom: 15px; outline: none; }
+    input[type="email"]:focus { border-color: #38bdf8; }
+    .primary-btn { width: 100%; background: #38bdf8; color: #0f172a; border: none; padding: 12px; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.2s; }
+    .primary-btn:hover { background: #0ea5e9; }
 
-        /* Offerwall Section */
-        #offerwall-container { display: none; width: 100%; max-width: 1200px; margin: 20px auto; flex: 1; }
-        iframe { width: 100%; min-height: 800px; border: none; border-radius: 8px; background: white; }
+    /* Grid Options / Clickable Tasks */
+    .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+    .feature-item { background: #0f172a; padding: 12px; border-radius: 8px; border: 1px solid #334155; font-size: 13px; color: #cbd5e1; font-weight: 500; text-decoration: none; display: block; transition: 0.2s; }
+    .feature-item:hover { border-color: #38bdf8; color: #38bdf8; }
 
-        /* Footer */
-        footer { text-align: center; padding: 20px; color: #64748b; font-size: 13px; border-top: 1px solid #1e293b; }
-    </style>
+    /* Dashboard View */
+    #dashboard-view { display: none; text-align: left; }
+    .stat-box { background: #0f172a; padding: 15px; border-radius: 10px; border: 1px solid #334155; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+    .cashout-btn { width: 100%; background: #10b981; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; font-size: 15px; cursor: pointer; margin-top: 10px; }
+    .cashout-btn:hover { background: #059669; }
+  </style>
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav>
-        <div class="logo">⚡ Task Cash</div>
-        <div id="userPanel" class="user-panel">
-            <span id="displayEmail"></span>
-            <div class="balance" id="balanceDisplay">Balance: $10.00</div>
-            <button class="logout-btn" onclick="logout()">Logout</button>
-        </div>
-    </nav>
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="logo">⚡ Task Cash</div>
+    <div class="user-panel" id="user-panel">
+      <div class="balance" id="user-balance">$10.00</div>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </nav>
 
-    <!-- Main Content Area -->
-    <div class="container">
-        <!-- Login Form -->
-        <div id="login-box">
-            <span class="badge">🎁 $10 Free Welcome Bonus</span>
-            <h1>Start Earning Today</h1>
-            <p>Sign up with your email to claim your first reward for free and unlock games, videos, and tasks.</p>
-            
-            <div class="features-grid">
-                <div class="feature-item">🎮 Play Games</div>
-                <div class="feature-item">📺 Watch Videos</div>
-                <div class="feature-item">📋 Complete Tasks</div>
-                <div class="feature-item">⭐ Earn Real Cash</div>
-            </div>
+  <div class="container">
+    
+    <!-- Sign Up Screen -->
+    <div class="card" id="signup-card">
+      <div class="badge">🎁 $10 Free Welcome Bonus</div>
+      <h1>Start Earning Today</h1>
+      <p>Sign up with your email to claim your first reward for free and unlock games, videos, and tasks.</p>
+      
+      <div class="features-grid">
+        <a href="#" class="feature-item" onclick="openTask('Games')">🎮 Play Games</a>
+        <a href="#" class="feature-item" onclick="openTask('Videos')">📺 Watch Videos</a>
+        <a href="#" class="feature-item" onclick="openTask('Tasks')">📋 Complete Tasks</a>
+        <a href="#" class="feature-item" onclick="openTask('Cash')">⭐ Earn Real Cash</a>
+      </div>
 
-            <input type="email" id="userEmail" placeholder="Enter your email address..." required>
-            <button class="start-btn" onclick="startWall()">Get Started & Claim $10</button>
-        </div>
-
-        <!-- Offerwall Wrapper -->
-        <div id="offerwall-container">
-            <iframe id="cpxFrame" src=""></iframe>
-        </div>
+      <form id="signup-form" onsubmit="handleSignup(event)">
+        <input type="email" id="email-input" placeholder="Enter your email address..." required>
+        <button type="submit" class="primary-btn">Get Started & Claim $10</button>
+      </form>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        &copy; 2026 Task Cash. All rights reserved.
-    </footer>
+    <!-- Dashboard Screen -->
+    <div class="card" id="dashboard-view">
+      <h1>Welcome Back!</h1>
+      <p id="user-email-display" style="color: #38bdf8; margin-bottom: 15px;"></p>
+      
+      <div class="stat-box">
+        <span>Current Balance:</span>
+        <strong style="color: #34d399; font-size: 18px;" id="dashboard-balance">$10.00</strong>
+      </div>
+      
+      <div class="stat-box">
+        <span>Minimum Cashout:</span>
+        <strong>$50.00</strong>
+      </div>
 
-    <script>
-        window.onload = function() {
-            const savedEmail = sessionStorage.getItem('taskCashEmail');
-            if (savedEmail) {
-                document.getElementById('userEmail').value = savedEmail;
-                startWall();
-            }
-        }
+      <div class="features-grid" style="margin-top: 15px;">
+        <a href="#" class="feature-item" onclick="openTask('Games')">🎮 Play Games</a>
+        <a href="#" class="feature-item" onclick="openTask('Videos')">📺 Watch Videos</a>
+        <a href="#" class="feature-item" onclick="openTask('Tasks')">📋 Complete Tasks</a>
+        <a href="#" class="feature-item" onclick="openTask('Cash')">⭐ Offer Wall</a>
+      </div>
 
-        function startWall() {
-            const email = document.getElementById('userEmail').value.trim();
-            if(!email || !email.includes('@')) {
-                alert('Please enter a valid email address.');
-                return;
-            }
-            
-            sessionStorage.setItem('taskCashEmail', email);
-            const uniqueUserId = btoa(email); 
+      <button class="cashout-btn" onclick="requestWithdrawal()">Request Cashout</button>
+    </div>
 
-            const cpxUrl = `https://offers.cpx-research.com/index.php?app_id=35482&ext_user_id=${uniqueUserId}&email=${encodeURIComponent(email)}`;
-            
-            document.getElementById('login-box').style.display = 'none';
-            document.getElementById('cpxFrame').src = cpxUrl;
-            document.getElementById('offerwall-container').style.display = 'block';
-            
-            document.getElementById('displayEmail').innerText = email;
-            document.getElementById('userPanel').style.display = 'flex';
-        }
+  </div>
 
-        function logout() {
-            sessionStorage.removeItem('taskCashEmail');
-            location.reload();
-        }
-    </script>
+  <script>
+    function handleSignup(event) {
+      event.preventDefault();
+      const email = document.getElementById('email-input').value;
+      if(email) {
+        document.getElementById('signup-card').style.display = 'none';
+        document.getElementById('dashboard-view').style.display = 'block';
+        document.getElementById('user-panel').style.display = 'flex';
+        document.getElementById('user-email-display').innerText = email;
+      }
+    }
+
+    function logout() {
+      document.getElementById('signup-card').style.display = 'block';
+      document.getElementById('dashboard-view').style.display = 'none';
+      document.getElementById('user-panel').style.display = 'none';
+      document.getElementById('email-input').value = '';
+    }
+
+    function openTask(type) {
+      // Once your CPAlead account is approved, replace the URL below with your offerwall link
+      const offerwallUrl = "https://your-cpalead-offerwall-link.com";
+      window.location.href = offerwallUrl;
+    }
+
+    function requestWithdrawal() {
+      alert("You need $50.00 minimum to cash out! Complete more tasks on the offer wall to unlock your payout.");
+    }
+  </script>
 
 </body>
 </html>
